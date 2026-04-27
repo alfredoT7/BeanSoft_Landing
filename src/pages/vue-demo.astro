@@ -1,0 +1,20 @@
+---
+import BeanBoard from '../components/vue/BeanBoard.vue';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="BeanSoft | Vue Demo" currentPath="/vue-demo">
+  <section class="py-6">
+    <div class="mb-10 max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-700 dark:text-cyan-200">Astro + Vue</p>
+      <h1 class="mt-4 text-5xl font-black tracking-tight text-stone-950 dark:text-white sm:text-6xl">
+        Vista separada para probar Vue sin ruido.
+      </h1>
+      <p class="mt-4 text-lg leading-8 text-stone-600 dark:text-stone-300">
+        Ruta usa island Vue con estado local, filtros y mutación de tarjetas.
+      </p>
+    </div>
+
+    <BeanBoard client:load />
+  </section>
+</BaseLayout>

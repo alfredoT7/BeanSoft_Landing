@@ -1,0 +1,70 @@
+---
+import StatusPanel from '../components/vue/StatusPanel.vue';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="BeanSoft | Layout Demo" currentPath="/layout">
+  <section class="py-6">
+    <span class="mb-6 inline-flex w-fit rounded-full border border-amber-400/40 bg-amber-300/20 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em] text-amber-700 dark:border-amber-400/30 dark:bg-amber-300/10 dark:text-amber-200">
+      Tailwind listo
+    </span>
+
+    <div class="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+      <div class="space-y-6">
+        <h1 class="max-w-3xl text-5xl font-black tracking-tight text-balance text-stone-950 dark:text-white sm:text-6xl">
+          Header y navbar viven en layout compartido.
+        </h1>
+
+        <p class="max-w-2xl text-lg leading-8 text-stone-600 dark:text-stone-300">
+          Página ahora solo define contenido. Shell general queda en `src/layouts/BaseLayout.astro`.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="/"
+            class="rounded-full bg-amber-300 px-6 py-3 text-sm font-bold text-stone-950 transition hover:bg-amber-200"
+          >
+            Volver inicio
+          </a>
+          <a
+            href="/vue-demo"
+            class="rounded-full border border-stone-300/70 px-6 py-3 text-sm font-semibold text-stone-800 transition hover:border-teal-500 hover:text-teal-700 dark:border-white/15 dark:text-stone-100 dark:hover:border-teal-300 dark:hover:text-teal-200"
+          >
+            Ir demo Vue
+          </a>
+        </div>
+
+        <StatusPanel client:load />
+      </div>
+
+      <div class="grid gap-4">
+        <article class="rounded-3xl border border-stone-200/70 bg-white/70 p-6 shadow-2xl shadow-stone-300/30 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-black/30">
+          <p class="text-sm uppercase tracking-[0.3em] text-teal-700/80 dark:text-teal-200/80">Estructura</p>
+          <ul class="mt-4 space-y-3 text-sm text-stone-600 dark:text-stone-300">
+            <li class="flex items-center justify-between rounded-2xl bg-stone-900/5 px-4 py-3 dark:bg-black/20">
+              <span>src/layouts</span>
+              <span class="font-semibold text-stone-950 dark:text-white">Shell Astro</span>
+            </li>
+            <li class="flex items-center justify-between rounded-2xl bg-stone-900/5 px-4 py-3 dark:bg-black/20">
+              <span>src/components/layout</span>
+              <span class="font-semibold text-stone-950 dark:text-white">Header/Nav</span>
+            </li>
+            <li class="flex items-center justify-between rounded-2xl bg-stone-900/5 px-4 py-3 dark:bg-black/20">
+              <span>src/components/vue</span>
+              <span class="font-semibold text-emerald-300">Islands</span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="rounded-3xl border border-amber-300/40 bg-amber-100/80 p-6 dark:border-amber-300/20 dark:bg-amber-300/10">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-800 dark:text-amber-100">Checklist</p>
+          <div class="mt-4 grid gap-3 text-sm text-amber-900 dark:text-amber-50">
+            <div class="rounded-2xl border border-amber-900/10 px-4 py-3 dark:border-amber-50/10">Layout base centralizado</div>
+            <div class="rounded-2xl border border-amber-900/10 px-4 py-3 dark:border-amber-50/10">Navbar compartido con estado activo</div>
+            <div class="rounded-2xl border border-amber-900/10 px-4 py-3 dark:border-amber-50/10">Carpetas listas para crecer con Vue</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

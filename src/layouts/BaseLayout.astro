@@ -1,0 +1,36 @@
+---
+import MainNav from '../components/navigation/MainNav.astro';
+import '../styles/global.css';
+
+type Props = {
+  title: string;
+  currentPath?: string;
+};
+
+const { title, currentPath = '/' } = Astro.props;
+---
+
+<html lang="es" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const storageKey = 'beansoft-theme';
+        const root = document.documentElement;
+        const saved = localStorage.getItem(storageKey);
+        const theme = saved === 'light' || saved === 'dark' ? saved : 'dark';
+        root.classList.toggle('dark', theme === 'dark');
+        root.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-stone-100 text-stone-900 dark:bg-stone-950 dark:text-stone-100">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.14),_transparent_30%),radial-gradient(circle_at_80%_20%,_rgba(34,211,238,0.10),_transparent_30%)] dark:bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.16),_transparent_30%),radial-gradient(circle_at_80%_20%,_rgba(34,211,238,0.12),_transparent_30%)]"></div>
+    <main class="relative mx-auto max-w-6xl px-6 py-12 pb-28">
+      <slot />
+    </main>
+    <MainNav currentPath={currentPath} />
+  </body>
+</html>
