@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 const links = [
   { href: '#inicio', label: 'Inicio' },
@@ -11,19 +11,40 @@ const links = [
 ];
 
 const scrolled = ref(false);
+const visible = ref(false);
 const open = ref(false);
 
-const onScroll = () => { scrolled.value = window.scrollY > 24; };
-onMounted(() => { onScroll(); window.addEventListener('scroll', onScroll, { passive: true }); });
-onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
+const onScroll = () => {
+  const y = window.scrollY;
+  const h = window.innerHeight;
+  visible.value = y > h * 0.7;
+  scrolled.value = y > 24;
+};
+
+onMounted(() => {
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll);
+  window.removeEventListener('resize', onScroll);
+});
+
+watch(visible, (v) => { if (!v) open.value = false; });
 
 const close = () => (open.value = false);
 </script>
 
 <template>
   <header
-    class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
-    :class="scrolled ? 'py-2' : 'py-4'"
+    class="fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out will-change-transform"
+    :class="[
+      scrolled ? 'py-2' : 'py-4',
+      visible
+        ? 'translate-y-0 opacity-100 pointer-events-auto'
+        : 'translate-y-[-110%] opacity-0 pointer-events-none'
+    ]"
   >
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <nav
