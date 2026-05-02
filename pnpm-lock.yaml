@@ -23,6 +23,12 @@ importers:
       tailwindcss:
         specifier: ^4.2.4
         version: 4.2.4
+      three:
+        specifier: ^0.134.0
+        version: 0.134.0
+      vanta:
+        specifier: ^0.5.24
+        version: 0.5.24
       vue:
         specifier: ^3.5.33
         version: 3.5.33
@@ -1783,6 +1789,9 @@ packages:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
     engines: {node: '>=6'}
 
+  three@0.134.0:
+    resolution: {integrity: sha512-LbBerg7GaSPjYtTOnu41AMp7tV6efUNR3p4Wk5NzkSsNTBuA5mDGOfwwZL1jhhVMLx9V20HolIUo0+U3AXehbg==}
+
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
 
@@ -1934,6 +1943,9 @@ packages:
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
+
+  vanta@0.5.24:
+    resolution: {integrity: sha512-fvieEbHy1ZS23zrcX+topzqAgA4Uct1enngOEWLFBgs9TtOf6RDFOYatH7KSVdrABzQDMCQ5myQy+nTSZZwLzg==}
 
   vfile-location@5.0.3:
     resolution: {integrity: sha512-5yXvWDEgqeiYiBe1lbxYF7UMAIm/IcopxMHrMQDq3nvKcjPKIhZklUKL+AE7J7uApI4kwe2snsK+eI6UTj9EHg==}
@@ -4094,6 +4106,8 @@ snapshots:
 
   tapable@2.3.3: {}
 
+  three@0.134.0: {}
+
   tiny-inflate@1.0.3: {}
 
   tinyclip@0.1.12: {}
@@ -4200,6 +4214,8 @@ snapshots:
       browserslist: 4.28.2
       escalade: 3.2.0
       picocolors: 1.1.1
+
+  vanta@0.5.24: {}
 
   vfile-location@5.0.3:
     dependencies:

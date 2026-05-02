@@ -42,3 +42,13 @@ yarn-error.log*
 *.zip
 *.tar.gz
 *.7z
+PROMT.txt
+*.pem
+*.key
+*.crt
+*.pfx
+*.cer
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local

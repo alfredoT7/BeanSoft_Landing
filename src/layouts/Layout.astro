@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const {
+  title = 'BeanSoft — Software moderno para impulsar tu negocio',
+  description = 'BeanSoft diseña y desarrolla soluciones digitales escalables, rápidas y atractivas para empresas que quieren crecer.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body class="relative">
+    <slot />
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+      );
+      document.querySelectorAll('.bs-reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
