@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 const links = [
   { href: '#inicio', label: 'Inicio' },
@@ -13,22 +13,52 @@ const links = [
 const scrolled = ref(false);
 const visible = ref(false);
 const open = ref(false);
+const revealProgress = ref(0);
+
+let rafId = 0;
+
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+const headerStyle = computed(() => {
+  const progress = revealProgress.value;
+  const translateY = -36 + (36 * progress);
+
+  return {
+    opacity: progress,
+    transform: `translate3d(0, ${translateY}px, 0)`,
+    pointerEvents: progress > 0.05 ? 'auto' : 'none',
+  };
+});
 
 const onScroll = () => {
   const y = window.scrollY;
   const h = window.innerHeight;
-  visible.value = y > h * 0.7;
+  const start = h * 0.52;
+  const end = h * 0.78;
+  const nextProgress = clamp((y - start) / Math.max(end - start, 1), 0, 1);
+
+  visible.value = nextProgress > 0.05;
+  revealProgress.value = nextProgress;
   scrolled.value = y > 24;
+};
+
+const queueScrollUpdate = () => {
+  if (rafId) return;
+  rafId = window.requestAnimationFrame(() => {
+    rafId = 0;
+    onScroll();
+  });
 };
 
 onMounted(() => {
   onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
+  window.addEventListener('scroll', queueScrollUpdate, { passive: true });
+  window.addEventListener('resize', queueScrollUpdate);
 });
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', onScroll);
-  window.removeEventListener('resize', onScroll);
+  window.removeEventListener('scroll', queueScrollUpdate);
+  window.removeEventListener('resize', queueScrollUpdate);
+  window.cancelAnimationFrame(rafId);
 });
 
 watch(visible, (v) => { if (!v) open.value = false; });
@@ -38,12 +68,11 @@ const close = () => (open.value = false);
 
 <template>
   <header
-    class="fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out will-change-transform"
+    class="fixed inset-x-0 top-0 z-50 will-change-transform"
+    :style="headerStyle"
     :class="[
       scrolled ? 'py-2' : 'py-4',
-      visible
-        ? 'translate-y-0 opacity-100 pointer-events-auto'
-        : 'translate-y-[-110%] opacity-0 pointer-events-none'
+      visible ? 'bs-navbar-visible' : 'bs-navbar-hidden'
     ]"
   >
     <div class="mx-auto max-w-7xl px-4 sm:px-6">

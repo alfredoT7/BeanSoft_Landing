@@ -272,6 +272,14 @@ body::before {
   transform: scale(1.14);
 }
 
+.bs-navbar-visible,
+.bs-navbar-hidden {
+  transition:
+    transform 240ms cubic-bezier(.22,.61,.36,1),
+    opacity 240ms cubic-bezier(.22,.61,.36,1),
+    padding 280ms cubic-bezier(.22,.61,.36,1);
+}
+
 .bs-float-soft {
   animation: bs-float-soft 5.5s ease-in-out infinite;
 }
