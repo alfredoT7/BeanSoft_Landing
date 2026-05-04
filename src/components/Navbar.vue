@@ -52,11 +52,13 @@ const close = () => (open.value = false);
         :class="scrolled ? 'bs-glass-strong bs-glow-blue' : 'bs-glass'"
       >
         <a href="#inicio" class="flex items-center gap-2 font-bold tracking-tight">
-          <img
-            src="/reducedlogo.svg"
-            alt="BeanSoft"
-            class="h-10 w-auto object-contain"
-          />
+          <span class="bs-logo-glow shrink-0">
+            <img
+              src="/reducedlogo.svg"
+              alt="BeanSoft"
+              class="h-10 w-auto object-contain"
+            />
+          </span>
           <span class="text-lg sm:text-xl text-white">
             Bean<span class="bs-gradient-text">Soft</span>
           </span>
