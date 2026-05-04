@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 const links = [
   { href: '#inicio', label: 'Inicio' },
@@ -13,22 +13,52 @@ const links = [
 const scrolled = ref(false);
 const visible = ref(false);
 const open = ref(false);
+const revealProgress = ref(0);
+
+let rafId = 0;
+
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+const headerStyle = computed(() => {
+  const progress = revealProgress.value;
+  const translateY = -36 + (36 * progress);
+
+  return {
+    opacity: progress,
+    transform: `translate3d(0, ${translateY}px, 0)`,
+    pointerEvents: progress > 0.05 ? 'auto' : 'none',
+  };
+});
 
 const onScroll = () => {
   const y = window.scrollY;
   const h = window.innerHeight;
-  visible.value = y > h * 0.7;
+  const start = h * 0.52;
+  const end = h * 0.78;
+  const nextProgress = clamp((y - start) / Math.max(end - start, 1), 0, 1);
+
+  visible.value = nextProgress > 0.05;
+  revealProgress.value = nextProgress;
   scrolled.value = y > 24;
+};
+
+const queueScrollUpdate = () => {
+  if (rafId) return;
+  rafId = window.requestAnimationFrame(() => {
+    rafId = 0;
+    onScroll();
+  });
 };
 
 onMounted(() => {
   onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
+  window.addEventListener('scroll', queueScrollUpdate, { passive: true });
+  window.addEventListener('resize', queueScrollUpdate);
 });
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', onScroll);
-  window.removeEventListener('resize', onScroll);
+  window.removeEventListener('scroll', queueScrollUpdate);
+  window.removeEventListener('resize', queueScrollUpdate);
+  window.cancelAnimationFrame(rafId);
 });
 
 watch(visible, (v) => { if (!v) open.value = false; });
@@ -38,12 +68,11 @@ const close = () => (open.value = false);
 
 <template>
   <header
-    class="fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out will-change-transform"
+    class="fixed inset-x-0 top-0 z-50 will-change-transform"
+    :style="headerStyle"
     :class="[
       scrolled ? 'py-2' : 'py-4',
-      visible
-        ? 'translate-y-0 opacity-100 pointer-events-auto'
-        : 'translate-y-[-110%] opacity-0 pointer-events-none'
+      visible ? 'bs-navbar-visible' : 'bs-navbar-hidden'
     ]"
   >
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
@@ -52,10 +81,12 @@ const close = () => (open.value = false);
         :class="scrolled ? 'bs-glass-strong bs-glow-blue' : 'bs-glass'"
       >
         <a href="#inicio" class="flex items-center gap-2 font-bold tracking-tight">
-          <span class="relative grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 text-slate-950 shadow-lg shadow-cyan-500/30">
-            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 4c4 0 8 3 8 8s-4 8-8 8c0-4 4-8 4-12 0-2-1-3-4-4Z" />
-            </svg>
+          <span class="bs-logo-glow shrink-0">
+            <img
+              src="/reducedlogo.svg"
+              alt="BeanSoft"
+              class="h-10 w-auto object-contain"
+            />
           </span>
           <span class="text-lg sm:text-xl text-white">
             Bean<span class="bs-gradient-text">Soft</span>

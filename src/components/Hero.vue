@@ -61,9 +61,17 @@ onBeforeUnmount(() => {
     <div class="bs-hero-orb bs-hero-orb-b"></div>
     <div class="bs-hero-scanline" aria-hidden="true"></div>
 
-    <div class="relative text-center max-w-5xl">
+    <div class="relative mx-auto flex max-w-5xl flex-col items-center text-center">
+      <span class="bs-logo-glow bs-logo-glow--hero bs-reveal">
+        <img
+          src="/reducedlogo.svg"
+          alt="Logo BeanSoft"
+          class="mx-auto w-32 sm:w-40 lg:w-48 drop-shadow-[0_0_35px_rgba(255,255,255,0.22)]"
+        />
+      </span>
+
       <p
-        class="bs-reveal bs-float-soft inline-flex items-center gap-2 rounded-full bs-glass px-4 py-1.5 text-xs font-medium text-cyan-200"
+        class="bs-reveal bs-float-soft mt-6 inline-flex items-center justify-center gap-2 self-center rounded-full bs-glass px-4 py-1.5 text-xs font-medium text-cyan-200"
       >
         <span class="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.9)]"></span>
         Software studio · Disponible para nuevos proyectos
