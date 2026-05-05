@@ -33,9 +33,9 @@ onMounted(async () => {
   if (reduce) return;
 
   const THREE = await import('three');
-  const NET = (await import('vanta/dist/vanta.net.min')).default;
+  const WAVES = (await import('vanta/dist/vanta.waves.min')).default;
 
-  effect = NET({
+  effect = WAVES({
     el: elRef.value,
     THREE,
     mouseControls: true,
@@ -45,12 +45,12 @@ onMounted(async () => {
     minWidth: 200.0,
     scale: 1.0,
     scaleMobile: 1.0,
-    backgroundColor: 0x03060f,
-    color: 0x4f7cff,
-    points: 12.0,
-    maxDistance: 22.0,
-    spacing: 17.0,
-    showDots: false,
+    backgroundColor: 0x040100,
+    color: 0xc74f0b,
+    shininess: 34.0,
+    waveHeight: 10.0,
+    waveSpeed: 0.62,
+    zoom: 0.94,
   });
 
   syncScroll();
