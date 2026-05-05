@@ -52,7 +52,7 @@ body::before {
 }
 
 .bs-gradient-text {
-  background: linear-gradient(120deg, #FFB15C 0%, #C85010 45%, #C74F0B 100%);
+  background: linear-gradient(120deg, #FF8A5B 0%, #FC4B08 48%, #C85010 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

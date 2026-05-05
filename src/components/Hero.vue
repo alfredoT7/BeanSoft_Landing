@@ -72,11 +72,11 @@ onBeforeUnmount(() => {
     <div class="bs-hero-scanline" aria-hidden="true"></div>
 
     <div class="relative mx-auto flex max-w-5xl flex-col items-center text-center">
-      <span class="bs-logo-glow bs-logo-glow--hero bs-reveal">
+      <span class="bs-reveal">
         <img
           src="/reducedlogo.svg"
           alt="Logo BeanSoft"
-          class="mx-auto w-32 sm:w-40 lg:w-48 drop-shadow-[0_0_35px_rgba(255,255,255,0.22)]"
+          class="mx-auto w-32 sm:w-40 lg:w-48"
         />
       </span>
 

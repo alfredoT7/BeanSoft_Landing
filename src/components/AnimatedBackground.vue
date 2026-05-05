@@ -11,12 +11,11 @@ const syncScroll = () => {
   if (!elRef.value) return;
 
   const y = window.scrollY || 0;
-  const offset = Math.min(y * 0.24, 180);
   const scale = 1 + Math.min(y / 4500, 0.045);
   const glowOffset = y * 0.14;
 
-  elRef.value.style.transform = `translate3d(0, ${offset}px, 0) scale(${scale})`;
-  elRef.value.style.opacity = String(Math.max(0.56, 1 - y / 2400));
+  elRef.value.style.transform = `scale(${scale})`;
+  elRef.value.style.opacity = String(Math.max(0.92, 1 - y / 4200));
   elRef.value.style.setProperty('--bs-glow-shift', `${glowOffset}px`);
   scrollRaf = 0;
 };
@@ -56,13 +55,13 @@ onMounted(async () => {
   camera.position.set(0, 0, 7.8);
 
   const renderer = new WebGLRenderer({
-    alpha: true,
+    alpha: false,
     antialias: true,
     powerPreference: 'high-performance',
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
   renderer.setClearColor(0x07111f, 1);
-  renderer.domElement.className = 'absolute inset-0 h-full w-full';
+  renderer.domElement.className = 'absolute inset-0 z-10 h-full w-full';
   elRef.value.appendChild(renderer.domElement);
 
   scene.add(new AmbientLight(0xffffff, 0.75));
@@ -115,6 +114,9 @@ onMounted(async () => {
     radius,
     opacity,
     offsetX = 0,
+    shellEmissive = 0.26,
+    coreEmissive = 0.7,
+    centerLineOpacity = 0.48,
   }: {
     offsetY: number;
     amplitude: number;
@@ -126,6 +128,9 @@ onMounted(async () => {
     radius: number;
     opacity: number;
     offsetX?: number;
+    shellEmissive?: number;
+    coreEmissive?: number;
+    centerLineOpacity?: number;
   }) => {
     const path = new CatmullRomCurve3(makeCurvePoints(offsetY, amplitude, length, depth, phase), false, 'catmullrom', 0.6);
 
@@ -133,22 +138,22 @@ onMounted(async () => {
     const shellMaterial = new MeshStandardMaterial({
       color,
       emissive: new Color(color),
-      emissiveIntensity: 0.22,
+      emissiveIntensity: shellEmissive,
       roughness: 0.28,
       metalness: 0.08,
-      transparent: true,
-      opacity,
+      transparent: false,
+      opacity: 1,
     });
 
     const coreGeometry = new TubeGeometry(path, 220, radius * 0.34, 12, false);
     const coreMaterial = new MeshStandardMaterial({
       color: coreColor,
       emissive: new Color(coreColor),
-      emissiveIntensity: 0.68,
-      roughness: 0.1,
+      emissiveIntensity: coreEmissive,
+      roughness: 0.12,
       metalness: 0,
-      transparent: true,
-      opacity: Math.min(opacity + 0.12, 0.95),
+      transparent: false,
+      opacity: 1,
     });
 
     const shellMesh = new Mesh(shellGeometry, shellMaterial);
@@ -158,7 +163,7 @@ onMounted(async () => {
     const lineMaterial = new LineBasicMaterial({
       color: coreColor,
       transparent: true,
-      opacity: 0.32,
+      opacity: centerLineOpacity,
     });
     const line = new Line(new THREE.BufferGeometry().setFromPoints(lineGeometry), lineMaterial);
 
@@ -188,11 +193,14 @@ onMounted(async () => {
     length: 9.8,
     depth: 0.5,
     phase: 0.35,
-    color: 0x8a2d1a,
-    coreColor: 0xf97360,
+    color: 0x55180f,
+    coreColor: 0xc85d4c,
     radius: 0.16,
     opacity: 0.34,
     offsetX: -0.5,
+    shellEmissive: 0.18,
+    coreEmissive: 0.52,
+    centerLineOpacity: 0.24,
   });
 
   addRibbon({
@@ -201,11 +209,14 @@ onMounted(async () => {
     length: 11.4,
     depth: 0.7,
     phase: 2.1,
-    color: 0x9a3412,
-    coreColor: 0xfb7185,
+    color: 0x63230f,
+    coreColor: 0xc86677,
     radius: 0.14,
     opacity: 0.28,
     offsetX: 0.4,
+    shellEmissive: 0.16,
+    coreEmissive: 0.46,
+    centerLineOpacity: 0.18,
   });
 
   addRibbon({
@@ -214,8 +225,8 @@ onMounted(async () => {
     length: 8.7,
     depth: 0.42,
     phase: 4.4,
-    color: 0x7c2d12,
-    coreColor: 0xfd8a74,
+    color: 0x4c190d,
+    coreColor: 0xc96455,
     radius: 0.11,
     opacity: 0.2,
     offsetX: -0.2,
@@ -227,11 +238,14 @@ onMounted(async () => {
     length: 7.9,
     depth: 0.36,
     phase: 1.15,
-    color: 0x7f1d1d,
-    coreColor: 0xf97360,
+    color: 0x541414,
+    coreColor: 0xc85d4c,
     radius: 0.095,
     opacity: 0.18,
     offsetX: 0.95,
+    shellEmissive: 0.24,
+    coreEmissive: 0.66,
+    centerLineOpacity: 0.42,
   });
 
   addRibbon({
@@ -240,11 +254,14 @@ onMounted(async () => {
     length: 7.4,
     depth: 0.3,
     phase: 3.15,
-    color: 0xc2410c,
-    coreColor: 0xfb7185,
+    color: 0x74270a,
+    coreColor: 0xc86677,
     radius: 0.085,
     opacity: 0.16,
     offsetX: -1.05,
+    shellEmissive: 0.14,
+    coreEmissive: 0.42,
+    centerLineOpacity: 0.16,
   });
 
   addRibbon({
@@ -253,11 +270,14 @@ onMounted(async () => {
     length: 7.8,
     depth: 0.38,
     phase: 5.05,
-    color: 0x6f1d1b,
-    coreColor: 0xfd8a74,
+    color: 0x431011,
+    coreColor: 0xc96455,
     radius: 0.09,
     opacity: 0.15,
     offsetX: 0.85,
+    shellEmissive: 0.22,
+    coreEmissive: 0.62,
+    centerLineOpacity: 0.4,
   });
 
   curveGroup.rotation.x = -0.42;
@@ -277,9 +297,11 @@ onMounted(async () => {
 
   const render = () => {
     const elapsed = clock.getElapsedTime();
-
     curveGroup.rotation.y = Math.sin(elapsed * 0.2) * 0.12;
+    curveGroup.rotation.x = -0.42;
+    curveGroup.rotation.z = -0.08;
     curveGroup.position.x = Math.sin(elapsed * 0.16) * 0.12;
+    curveGroup.position.y = 0;
 
     tubes.forEach((tube, index) => {
       tube.mesh.position.y = tube.baseY + Math.sin(elapsed * tube.drift + tube.swing) * tube.floatY;
@@ -333,6 +355,6 @@ onBeforeUnmount(() => {
     ref="elRef"
     class="pointer-events-none fixed inset-0 -z-10 overflow-hidden transition-transform duration-300 ease-out"
   >
-    <div class="bs-bg-glow absolute inset-[-12%]"></div>
+    <div class="bs-bg-glow absolute inset-[-12%] z-0"></div>
   </div>
 </template>
