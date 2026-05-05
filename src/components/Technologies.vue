@@ -9,7 +9,7 @@ const techs = [
   <section id="tecnologias" class="relative py-28">
     <div class="mx-auto max-w-7xl px-6">
       <div class="max-w-2xl">
-        <p class="bs-reveal text-xs uppercase tracking-[0.35em] text-cyan-300/80">Tecnologías</p>
+        <p class="bs-reveal text-xs uppercase tracking-[0.35em] text-orange-300/90">Tecnologías</p>
         <h2 class="bs-reveal mt-3 text-4xl sm:text-5xl font-bold text-white" data-delay="1" style="font-family:'Space Grotesk',Inter,sans-serif;">
           Stack <span class="bs-gradient-text">moderno</span>, decisiones probadas
         </h2>
@@ -22,10 +22,10 @@ const techs = [
         <span
           v-for="(t, i) in techs"
           :key="t"
-          class="bs-glass rounded-full px-5 py-2.5 text-sm font-medium text-slate-200 hover:text-white hover:border-cyan-300/40 transition"
+          class="bs-glass rounded-full px-5 py-2.5 text-sm font-medium text-slate-200 hover:text-white hover:border-orange-300/40 transition"
           :style="{ animationDelay: `${i * 0.1}s` }"
         >
-          <span class="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-cyan-400 align-middle shadow-[0_0_8px_rgba(34,211,238,0.9)]"></span>
+          <span class="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-[#C74F0B] align-middle shadow-[0_0_8px_rgba(200,80,16,0.9)]"></span>
           {{ t }}
         </span>
       </div>

@@ -13,7 +13,7 @@ const steps = [
   <section class="relative py-28">
     <div class="mx-auto max-w-7xl px-6">
       <div class="max-w-2xl">
-        <p class="bs-reveal text-xs uppercase tracking-[0.35em] text-cyan-300/80">Proceso de trabajo</p>
+        <p class="bs-reveal text-xs uppercase tracking-[0.35em] text-orange-300/90">Proceso de trabajo</p>
         <h2 class="bs-reveal mt-3 text-4xl sm:text-5xl font-bold text-white" data-delay="1" style="font-family:'Space Grotesk',Inter,sans-serif;">
           Cómo <span class="bs-gradient-text">trabajamos</span>
         </h2>
@@ -29,11 +29,11 @@ const steps = [
           class="bs-reveal bs-glass bs-card-hover relative rounded-3xl p-6 overflow-hidden"
           :data-delay="(i % 6) + 1"
         >
-          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"></div>
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C74F0B]/45 to-transparent"></div>
 
           <div class="flex items-start justify-between">
             <span class="text-5xl font-black bs-gradient-text leading-none" style="font-family:'Space Grotesk',Inter,sans-serif;">{{ s.n }}</span>
-            <span class="grid h-9 w-9 place-items-center rounded-full border border-cyan-300/30 text-cyan-300">
+            <span class="grid h-9 w-9 place-items-center rounded-full border border-[#C85010]/30 text-orange-300">
               <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/></svg>
             </span>
           </div>
