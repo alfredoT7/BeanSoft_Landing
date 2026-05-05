@@ -110,11 +110,32 @@ body::before {
   -webkit-backdrop-filter: blur(18px);
 }
 
+.bs-glass-navy {
+  background: rgba(7, 17, 31, 0.58);
+  border: 1px solid rgba(96, 165, 250, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.bs-glass-strong-navy {
+  background: rgba(7, 17, 31, 0.82);
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
 .bs-glow-orange {
   box-shadow:
     0 0 0 1px rgba(255, 177, 92, 0.15),
     0 20px 60px -10px rgba(200, 80, 16, 0.32),
     0 0 80px -20px rgba(168, 58, 8, 0.5);
+}
+
+.bs-glow-navy {
+  box-shadow:
+    0 0 0 1px rgba(125, 211, 252, 0.12),
+    0 20px 60px -10px rgba(14, 116, 144, 0.2),
+    0 0 80px -20px rgba(30, 64, 175, 0.28);
 }
 
 .bs-card-hover {

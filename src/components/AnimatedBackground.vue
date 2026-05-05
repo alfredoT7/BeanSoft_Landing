@@ -61,7 +61,7 @@ onMounted(async () => {
     powerPreference: 'high-performance',
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
-  renderer.setClearColor(0x000000, 0);
+  renderer.setClearColor(0x07111f, 1);
   renderer.domElement.className = 'absolute inset-0 h-full w-full';
   elRef.value.appendChild(renderer.domElement);
 
