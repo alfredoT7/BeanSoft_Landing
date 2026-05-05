@@ -78,7 +78,7 @@ const close = () => (open.value = false);
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <nav
         class="flex items-center justify-between rounded-full px-4 sm:px-6 py-3 transition-all duration-300"
-        :class="scrolled ? 'bs-glass-strong bs-glow-blue' : 'bs-glass'"
+        :class="scrolled ? 'bs-glass-strong bs-glow-orange' : 'bs-glass'"
       >
         <a href="#inicio" class="flex items-center gap-2 font-bold tracking-tight">
           <span class="bs-logo-glow shrink-0">

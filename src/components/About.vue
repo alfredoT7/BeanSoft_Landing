@@ -13,7 +13,7 @@ const values = [
     <div class="mx-auto max-w-7xl px-6">
       <div class="grid gap-12 lg:grid-cols-12 items-start">
         <div class="lg:col-span-5">
-          <p class="bs-reveal text-xs uppercase tracking-[0.35em] text-cyan-300/80">Nosotros</p>
+          <p class="bs-reveal text-xs uppercase tracking-[0.35em] text-orange-300/90">Nosotros</p>
           <h2 class="bs-reveal mt-3 text-4xl sm:text-5xl font-bold text-white" data-delay="1" style="font-family:'Space Grotesk',Inter,sans-serif;">
             Diseño + tecnología
             <br /><span class="bs-gradient-text">+ estrategia</span>
@@ -38,7 +38,7 @@ const values = [
               :data-delay="(i % 5) + 1"
             >
               <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 border border-cyan-300/25 text-cyan-300">
+                <div class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[#C74F0B]/20 to-[#A83A08]/20 border border-[#C85010]/25 text-orange-300">
                   <svg v-if="v.icon === 'check'" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7"/></svg>
                   <svg v-else-if="v.icon === 'spark'" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
                   <svg v-else-if="v.icon === 'chart'" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h16M8 15v-4M12 15V9M16 15v-2"/></svg>
