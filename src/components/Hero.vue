@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 
-const targetText = 'Somos BeanSoft';
+const targetText = 'BeanSoft';
 const typedLength = ref(0);
 const isDeleting = ref(false);
+let deleteTargetLength = 0;
 let timer = 0;
 
 const typedText = computed(() => targetText.slice(0, typedLength.value));
-const typedLead = computed(() => typedText.value.replace('BeanSoft', ''));
-const typedBrand = computed(() => typedText.value.slice(typedLead.value.length));
+
+const pickDeleteTarget = () => {
+  const partialDeletes = [targetText.length - 2, targetText.length - 3, targetText.length - 4];
+  const shouldDeleteAll = Math.random() < 0.35;
+
+  if (shouldDeleteAll) return 0;
+
+  return partialDeletes[Math.floor(Math.random() * partialDeletes.length)];
+};
 
 const startTyping = () => {
   const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -20,27 +28,29 @@ const startTyping = () => {
   const tick = () => {
     if (!isDeleting.value && typedLength.value < targetText.length) {
       typedLength.value += 1;
-      timer = window.setTimeout(tick, typedLength.value < 6 ? 85 : 120);
+      const typingDelay = typedLength.value < 4 ? 165 : 205;
+      timer = window.setTimeout(tick, typingDelay);
       return;
     }
 
     if (!isDeleting.value && typedLength.value >= targetText.length) {
       isDeleting.value = true;
-      timer = window.setTimeout(tick, 1500);
+      deleteTargetLength = pickDeleteTarget();
+      timer = window.setTimeout(tick, 2200);
       return;
     }
 
-    if (isDeleting.value && typedLength.value > 0) {
+    if (isDeleting.value && typedLength.value > deleteTargetLength) {
       typedLength.value -= 1;
-      timer = window.setTimeout(tick, 55);
+      timer = window.setTimeout(tick, 135);
       return;
     }
 
     isDeleting.value = false;
-    timer = window.setTimeout(tick, 450);
+    timer = window.setTimeout(tick, 950);
   };
 
-  timer = window.setTimeout(tick, 450);
+  timer = window.setTimeout(tick, 900);
 };
 
 onMounted(() => {
@@ -62,11 +72,11 @@ onBeforeUnmount(() => {
     <div class="bs-hero-scanline" aria-hidden="true"></div>
 
     <div class="relative mx-auto flex max-w-5xl flex-col items-center text-center">
-      <span class="bs-logo-glow bs-logo-glow--hero bs-reveal">
+      <span class="bs-reveal">
         <img
           src="/reducedlogo.svg"
           alt="Logo BeanSoft"
-          class="mx-auto w-32 sm:w-40 lg:w-48 drop-shadow-[0_0_35px_rgba(255,255,255,0.22)]"
+          class="mx-auto w-32 sm:w-40 lg:w-48"
         />
       </span>
 
@@ -84,7 +94,7 @@ onBeforeUnmount(() => {
       >
         <span class="block">Hola,</span>
         <span class="bs-terminal-line mt-3 inline-flex items-baseline">
-          <span class="text-slate-200">{{ typedLead }}</span><span class="bs-gradient-text">{{ typedBrand }}</span><span class="bs-terminal-cursor" aria-hidden="true"></span>
+          <span class="mr-3 text-slate-200">Somos</span><span class="bs-gradient-text">{{ typedText }}</span><span class="bs-terminal-cursor" aria-hidden="true"></span>
         </span>
       </h1>
 

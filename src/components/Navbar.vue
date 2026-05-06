@@ -78,7 +78,7 @@ const close = () => (open.value = false);
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <nav
         class="flex items-center justify-between rounded-full px-4 sm:px-6 py-3 transition-all duration-300"
-        :class="scrolled ? 'bs-glass-strong bs-glow-orange' : 'bs-glass'"
+        :class="scrolled ? 'bs-glass-strong-navy bs-glow-navy' : 'bs-glass-navy'"
       >
         <a href="#inicio" class="flex items-center gap-2 font-bold tracking-tight">
           <span class="bs-logo-glow shrink-0">
@@ -112,7 +112,7 @@ const close = () => (open.value = false);
 
           <button
             type="button"
-            class="lg:hidden grid place-items-center h-10 w-10 rounded-full bs-glass text-slate-200"
+            class="lg:hidden grid place-items-center h-10 w-10 rounded-full bs-glass-navy text-slate-200"
             aria-label="Abrir menú"
             @click="open = !open"
           >
@@ -134,7 +134,7 @@ const close = () => (open.value = false);
         leave-from-class="opacity-100 translate-y-0"
         leave-to-class="opacity-0 -translate-y-2"
       >
-        <div v-if="open" class="lg:hidden mt-2 rounded-3xl bs-glass-strong p-3">
+        <div v-if="open" class="lg:hidden mt-2 rounded-3xl bs-glass-strong-navy p-3">
           <ul class="flex flex-col">
             <li v-for="l in links" :key="l.href">
               <a
