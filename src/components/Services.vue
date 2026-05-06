@@ -1,56 +1,117 @@
 <script setup lang="ts">
-type Service = { title: string; desc: string; icon: string };
-
-const services: Service[] = [
-  { title: 'Desarrollo Web', desc: 'Sitios y aplicaciones web rápidas, accesibles y optimizadas para SEO.', icon: 'web' },
-  { title: 'Aplicaciones Empresariales', desc: 'Sistemas robustos para gestión interna, ventas, operaciones y reportería.', icon: 'building' },
-  { title: 'Sistemas a medida', desc: 'Soluciones diseñadas alrededor de tu proceso, no al revés.', icon: 'layers' },
-  { title: 'Automatización', desc: 'Integraciones y workflows que eliminan tareas manuales repetitivas.', icon: 'bolt' },
-  { title: 'UI/UX Design', desc: 'Interfaces claras, modernas y centradas en la experiencia del usuario.', icon: 'sparkles' },
-  { title: 'Consultoría tecnológica', desc: 'Asesoría en arquitectura, stack, performance y escalabilidad.', icon: 'compass' },
-];
 </script>
 
 <template>
   <section id="servicios" class="relative py-28">
     <div class="mx-auto max-w-7xl px-6">
-      <div class="max-w-2xl">
-        <p class="bs-reveal text-xs uppercase tracking-[0.35em] text-orange-300/90">Servicios</p>
-        <h2 class="bs-reveal mt-3 text-4xl sm:text-5xl font-bold text-white" data-delay="1" style="font-family:'Space Grotesk',Inter,sans-serif;">
-          Soluciones <span class="bs-gradient-text">a la medida</span> de tu negocio
+      <!-- Header -->
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <p class="bs-reveal-scale text-xs uppercase tracking-[0.35em] text-orange-300/90">Proyecto</p>
+        <h2 class="bs-reveal-scale mt-3 text-4xl sm:text-5xl font-bold text-white" data-delay="1" style="font-family:'Space Grotesk',Inter,sans-serif;">
+          Nuestro proyecto para <span class="bs-gradient-text">la hackatón</span>
         </h2>
-        <p class="bs-reveal mt-4 text-slate-300/90" data-delay="2">
-          Cubrimos todo el ciclo: estrategia, diseño, desarrollo y mantenimiento. Sin sorpresas.
+        <p class="bs-reveal-scale mt-4 text-slate-300/90 text-lg" data-delay="2">
+          Estamos preparando una demo funcional para presentar nuestra solución al reto. Muy pronto podrás conocer el resultado del trabajo de BeanSoft.
         </p>
       </div>
 
-      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <article
-          v-for="(s, i) in services"
-          :key="s.title"
-          class="bs-reveal bs-glass bs-card-hover group relative rounded-3xl p-7 overflow-hidden"
-          :data-delay="(i % 6) + 1"
-        >
-          <div class="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-[#C74F0B]/15 blur-3xl opacity-0 group-hover:opacity-100 transition"></div>
+      <!-- Images + Preview Row -->
+      <div class="bs-reveal-scale mt-16 grid lg:grid-cols-[2fr_1fr] gap-8 items-start" data-delay="3">
+        <!-- Center: Demo Images (PC Large + Mobile Overlay) -->
+        <div class="relative">
+          <!-- Background glow -->
+          <div class="absolute -inset-6 bg-gradient-to-br from-orange-500/15 to-transparent rounded-3xl blur-3xl opacity-60"></div>
 
-          <div class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-[#C74F0B]/20 to-[#A83A08]/20 border border-[#C85010]/25 text-orange-300">
-            <svg v-if="s.icon === 'web'" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 14h6"/></svg>
-            <svg v-else-if="s.icon === 'building'" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21h16M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M10 8h4M10 12h4M10 16h4"/></svg>
-            <svg v-else-if="s.icon === 'layers'" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5m-18 4 9 5 9-5"/></svg>
-            <svg v-else-if="s.icon === 'bolt'" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 3 4 14h7l-1 7 9-11h-7l1-7Z"/></svg>
-            <svg v-else-if="s.icon === 'sparkles'" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg>
-            <svg v-else viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m15 9-2 5-5 2 2-5 5-2Z"/></svg>
+          <div class="relative">
+            <!-- PC Image (Large, Main) -->
+            <div class="relative rounded-2xl overflow-hidden border border-orange-500/20 bs-glass-navy p-2 shadow-2xl">
+              <div class="rounded-xl overflow-hidden bg-slate-900/50">
+                <img
+                  src="/pc-image.png"
+                  alt="Demo Dashboard"
+                  class="w-full h-auto object-cover rounded-lg backdrop-blur-sm bs-image-parallax"
+                  style="filter: blur(2px);"
+                />
+              </div>
+            </div>
+            <div class="absolute -top-3 left-3 text-xs uppercase tracking-wider text-orange-300/70 bg-slate-900/80 px-3 py-1 rounded-full">
+              Dashboard
+            </div>
+
+            <!-- Mobile Image (Overlay, Top Right) -->
+            <div class="absolute -top-6 -right-8 w-32 sm:w-40">
+              <div class="relative rounded-2xl overflow-hidden border border-orange-500/20 p-0 shadow-xl">
+                <img
+                  src="/mobile-image.png"
+                  alt="Demo Mobile"
+                  class="w-full h-auto object-cover rounded-2xl backdrop-blur-sm bs-image-parallax"
+                  style="filter: blur(2px);"
+                />
+              </div>
+              <div class="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-xs uppercase tracking-wider text-orange-300/70 bg-slate-900/80 px-3 py-1 rounded-full whitespace-nowrap">
+                Mobile
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Blurred Mock Content + Text Info -->
+        <div class="bs-float-in rounded-2xl border border-orange-500/30 bs-glass-navy p-6 flex flex-col justify-between h-full" data-delay="2">
+          <!-- Blurred Mock Content Top -->
+          <div class="space-y-3">
+            <!-- Mock title -->
+            <div class="h-5 bg-slate-700 rounded-lg w-3/4" style="filter: blur(4px);"></div>
+
+            <!-- Mock content lines -->
+            <div class="space-y-2">
+              <div class="h-3 bg-slate-600 rounded w-full" style="filter: blur(4px);"></div>
+              <div class="h-3 bg-slate-600 rounded w-5/6" style="filter: blur(4px);"></div>
+              <div class="h-3 bg-slate-600 rounded w-4/5" style="filter: blur(4px);"></div>
+            </div>
           </div>
 
-          <h3 class="mt-5 text-lg font-semibold text-white">{{ s.title }}</h3>
-          <p class="mt-2 text-sm text-slate-400 leading-relaxed">{{ s.desc }}</p>
-
-          <div class="mt-5 flex items-center gap-1 text-xs font-semibold text-orange-300 opacity-0 group-hover:opacity-100 transition translate-y-1 group-hover:translate-y-0">
-            Saber más
-            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/></svg>
+          <!-- Mock stats/tags -->
+          <div class="space-y-2 pt-4 border-t border-slate-700/50">
+            <div class="flex gap-2 flex-wrap">
+              <div class="h-6 w-20 bg-orange-500/30 rounded-full" style="filter: blur(3px);"></div>
+              <div class="h-6 w-24 bg-orange-500/20 rounded-full" style="filter: blur(3px);"></div>
+              <div class="h-6 w-20 bg-orange-500/20 rounded-full" style="filter: blur(3px);"></div>
+            </div>
           </div>
-        </article>
+
+          <!-- Real Text Content Below Blurred Content -->
+          <div class="mt-6 pt-6 border-t border-slate-700/50 space-y-4">
+            <!-- Estado -->
+            <div>
+              <p class="text-xs uppercase tracking-[0.35em] text-orange-300/90 mb-2">Estado</p>
+              <h3 class="text-lg sm:text-xl font-bold text-white mb-2">
+                Próximamente
+              </h3>
+              <p class="text-base text-orange-300 font-semibold">
+                16 y 17 de mayo
+              </p>
+            </div>
+
+            <!-- Description -->
+            <div class="space-y-3 pt-4 border-t border-slate-700/50">
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                La hackatón será el escenario perfecto para mostrar cómo BeanSoft transforma ideas en soluciones funcionales. Nuestra demo incluye el trabajo completo del equipo en diseño, desarrollo y estrategia.
+              </p>
+              <p class="text-slate-400 text-xs">
+                Sigue nuestro progreso y prepárate para conocer la innovación que estamos construyendo.
+              </p>
+            </div>
+          </div>
+
+          <div class="absolute top-3 right-3 text-xs uppercase tracking-wider text-orange-300/50 font-semibold">
+            Preview
+          </div>
+        </div>
       </div>
+
+      <!-- Decorative elements -->
+      <div class="absolute top-1/3 left-10 w-72 h-72 bg-orange-500/5 rounded-full blur-3xl -z-10"></div>
+      <div class="absolute bottom-0 right-20 w-96 h-96 bg-slate-500/5 rounded-full blur-3xl -z-10"></div>
     </div>
   </section>
 </template>

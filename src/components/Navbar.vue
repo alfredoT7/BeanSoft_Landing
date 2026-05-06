@@ -3,11 +3,11 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 const links = [
   { href: '#inicio', label: 'Inicio' },
-  { href: '#servicios', label: 'Servicios' },
-  { href: '#proyectos', label: 'Proyectos' },
+  { href: '#servicios', label: 'Proyecto' },
+  { href: '#proyectos', label: 'Equipo' },
   { href: '#tecnologias', label: 'Tecnologías' },
-  { href: '#nosotros', label: 'Nosotros' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '#nosotros', label: 'Hackatón' },
+  { href: '#contacto', label: 'Demo' },
 ];
 
 const scrolled = ref(false);
@@ -104,7 +104,7 @@ const close = () => (open.value = false);
 
         <div class="flex items-center gap-2">
           <a href="#contacto" class="hidden sm:inline-flex bs-btn-primary">
-            Hablemos
+            Ver Demo
             <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5" />
             </svg>
@@ -144,7 +144,7 @@ const close = () => (open.value = false);
               >{{ l.label }}</a>
             </li>
             <li class="px-2 pt-2">
-              <a href="#contacto" class="bs-btn-primary w-full justify-center" @click="close">Hablemos</a>
+              <a href="#contacto" class="bs-btn-primary w-full justify-center" @click="close">Ver Demo</a>
             </li>
           </ul>
         </div>
