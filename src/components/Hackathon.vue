@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <section id="nosotros" class="relative py-28">
+  <section id="hackaton" class="relative py-28">
     <div class="mx-auto max-w-7xl px-6">
       <div class="max-w-3xl mx-auto text-center">
         <p class="bs-reveal-scale text-xs uppercase tracking-[0.35em] text-orange-300/90">Hackatón</p>

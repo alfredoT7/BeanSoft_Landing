@@ -13,7 +13,7 @@ const submit = (e: Event) => {
 </script>
 
 <template>
-  <section id="contacto" class="relative py-28">
+  <section id="demo" class="relative py-28">
     <div class="mx-auto max-w-7xl px-6">
       <div class="bs-reveal relative overflow-hidden rounded-[2.5rem] bs-glass-strong p-8 sm:p-14 bs-glow-orange">
         <div class="absolute -top-40 -right-20 h-96 w-96 rounded-full bg-[#C74F0B]/20 blur-3xl"></div>
@@ -21,13 +21,13 @@ const submit = (e: Event) => {
 
         <div class="relative grid gap-12 lg:grid-cols-2 items-start">
           <div>
-            <p class="text-xs uppercase tracking-[0.35em] text-orange-300/90">Contacto</p>
+            <p class="text-xs uppercase tracking-[0.35em] text-orange-300/90">Demo</p>
             <h2 class="mt-3 text-4xl sm:text-5xl font-bold text-white leading-tight" style="font-family:'Space Grotesk',Inter,sans-serif;">
-              ¿Tienes una idea?
-              <br /><span class="bs-gradient-text">Construyámosla juntos.</span>
+              ¿Quieres ver la demo?
+              <br /><span class="bs-gradient-text">Hablemos.</span>
             </h2>
             <p class="mt-5 text-slate-300/90 max-w-md">
-              Cuéntanos qué necesitas y te respondemos con una propuesta inicial en menos de 48h.
+              Cuéntanos qué necesitas y te compartimos una vista inicial de la solución que estamos preparando.
             </p>
 
             <ul class="mt-8 space-y-3 text-sm text-slate-300">
@@ -85,7 +85,7 @@ const submit = (e: Event) => {
             </div>
 
             <button type="submit" class="bs-btn-primary w-full justify-center">
-              Enviar mensaje
+              Solicitar demo
               <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/>
               </svg>
@@ -97,7 +97,7 @@ const submit = (e: Event) => {
               enter-to-class="opacity-100 translate-y-0"
             >
               <p v-if="sent" class="text-sm text-orange-300 text-center">
-                ¡Gracias! Hemos recibido tu mensaje (mock).
+                ¡Gracias! Hemos recibido tu solicitud (mock).
               </p>
             </transition>
           </form>

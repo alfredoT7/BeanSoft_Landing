@@ -106,10 +106,10 @@ onBeforeUnmount(() => {
       </p>
 
       <a
-        href="#servicios"
+        href="#proyecto"
         class="bs-reveal mt-16 inline-flex flex-col items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-slate-400 hover:text-orange-300 transition bs-scroll-cue"
         data-delay="3"
-        aria-label="Ir a servicios"
+        aria-label="Ir a proyecto"
       >
         Scroll
         <span class="h-12 w-[1px] bg-gradient-to-b from-[#C74F0B] to-transparent"></span>

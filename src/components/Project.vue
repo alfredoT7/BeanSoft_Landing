@@ -2,9 +2,8 @@
 </script>
 
 <template>
-  <section id="servicios" class="relative py-28">
+  <section id="proyecto" class="relative py-28">
     <div class="mx-auto max-w-7xl px-6">
-      <!-- Header -->
       <div class="max-w-3xl mx-auto text-center mb-16">
         <p class="bs-reveal-scale text-xs uppercase tracking-[0.35em] text-orange-300/90">Proyecto</p>
         <h2 class="bs-reveal-scale mt-3 text-4xl sm:text-5xl font-bold text-white" data-delay="1" style="font-family:'Space Grotesk',Inter,sans-serif;">
@@ -15,15 +14,11 @@
         </p>
       </div>
 
-      <!-- Images + Preview Row -->
       <div class="bs-reveal-scale mt-16 grid lg:grid-cols-[2fr_1fr] gap-8 items-start" data-delay="3">
-        <!-- Center: Demo Images (PC Large + Mobile Overlay) -->
         <div class="relative">
-          <!-- Background glow -->
           <div class="absolute -inset-6 bg-gradient-to-br from-orange-500/15 to-transparent rounded-3xl blur-3xl opacity-60"></div>
 
           <div class="relative">
-            <!-- PC Image (Large, Main) -->
             <div class="relative rounded-2xl overflow-hidden border border-orange-500/20 bs-glass-navy p-2 shadow-2xl">
               <div class="rounded-xl overflow-hidden bg-slate-900/50">
                 <img
@@ -38,7 +33,6 @@
               Dashboard
             </div>
 
-            <!-- Mobile Image (Overlay, Top Right) -->
             <div class="absolute -top-6 -right-8 w-32 sm:w-40">
               <div class="relative rounded-2xl overflow-hidden border border-orange-500/20 p-0 shadow-xl">
                 <img
@@ -55,14 +49,10 @@
           </div>
         </div>
 
-        <!-- Right: Blurred Mock Content + Text Info -->
         <div class="bs-float-in rounded-2xl border border-orange-500/30 bs-glass-navy p-6 flex flex-col justify-between h-full" data-delay="2">
-          <!-- Blurred Mock Content Top -->
           <div class="space-y-3">
-            <!-- Mock title -->
             <div class="h-5 bg-slate-700 rounded-lg w-3/4" style="filter: blur(4px);"></div>
 
-            <!-- Mock content lines -->
             <div class="space-y-2">
               <div class="h-3 bg-slate-600 rounded w-full" style="filter: blur(4px);"></div>
               <div class="h-3 bg-slate-600 rounded w-5/6" style="filter: blur(4px);"></div>
@@ -70,7 +60,6 @@
             </div>
           </div>
 
-          <!-- Mock stats/tags -->
           <div class="space-y-2 pt-4 border-t border-slate-700/50">
             <div class="flex gap-2 flex-wrap">
               <div class="h-6 w-20 bg-orange-500/30 rounded-full" style="filter: blur(3px);"></div>
@@ -79,9 +68,7 @@
             </div>
           </div>
 
-          <!-- Real Text Content Below Blurred Content -->
           <div class="mt-6 pt-6 border-t border-slate-700/50 space-y-4">
-            <!-- Estado -->
             <div>
               <p class="text-xs uppercase tracking-[0.35em] text-orange-300/90 mb-2">Estado</p>
               <h3 class="text-lg sm:text-xl font-bold text-white mb-2">
@@ -92,7 +79,6 @@
               </p>
             </div>
 
-            <!-- Description -->
             <div class="space-y-3 pt-4 border-t border-slate-700/50">
               <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
                 La hackatón será el escenario perfecto para mostrar cómo BeanSoft transforma ideas en soluciones funcionales. Nuestra demo incluye el trabajo completo del equipo en diseño, desarrollo y estrategia.
@@ -109,7 +95,6 @@
         </div>
       </div>
 
-      <!-- Decorative elements -->
       <div class="absolute top-1/3 left-10 w-72 h-72 bg-orange-500/5 rounded-full blur-3xl -z-10"></div>
       <div class="absolute bottom-0 right-20 w-96 h-96 bg-slate-500/5 rounded-full blur-3xl -z-10"></div>
     </div>

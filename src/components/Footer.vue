@@ -3,26 +3,26 @@ const year = new Date().getFullYear();
 
 const groups = [
   {
-    title: 'Compañía',
+    title: 'Navegación',
     links: [
       { label: 'Inicio', href: '#inicio' },
-      { label: 'Nosotros', href: '#nosotros' },
-      { label: 'Proyectos', href: '#proyectos' },
+      { label: 'Proyecto', href: '#proyecto' },
+      { label: 'Equipo', href: '#equipo' },
     ],
   },
   {
-    title: 'Servicios',
+    title: 'Secciones',
     links: [
-      { label: 'Desarrollo Web', href: '#servicios' },
-      { label: 'Sistemas a medida', href: '#servicios' },
-      { label: 'Consultoría', href: '#servicios' },
+      { label: 'Tecnologías', href: '#tecnologias' },
+      { label: 'Hackatón', href: '#hackaton' },
+      { label: 'Demo', href: '#demo' },
     ],
   },
   {
-    title: 'Contacto',
+    title: 'Demo',
     links: [
-      { label: 'hola@beansoft.dev', href: '#contacto' },
-      { label: 'Hablemos', href: '#contacto' },
+      { label: 'hola@beansoft.dev', href: '#demo' },
+      { label: 'Hablemos', href: '#demo' },
     ],
   },
 ];
