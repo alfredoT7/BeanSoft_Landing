@@ -18,7 +18,7 @@
         <div class="relative mx-auto w-full">
           <div class="absolute -inset-6 bg-gradient-to-br from-orange-500/15 to-transparent rounded-3xl blur-3xl opacity-60"></div>
 
-          <div class="relative">
+          <div class="relative overflow-hidden sm:overflow-visible">
             <div class="relative rounded-2xl overflow-hidden border border-orange-500/20 bs-glass-navy p-2 shadow-2xl">
               <div class="rounded-xl overflow-hidden bg-slate-900/50">
                 <img

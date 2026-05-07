@@ -18,13 +18,14 @@ body {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   background-color: var(--bs-bg);
   color: #fff3e8;
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 

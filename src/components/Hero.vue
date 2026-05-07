@@ -65,7 +65,7 @@ onBeforeUnmount(() => {
 <template>
   <section
     id="inicio"
-    class="relative min-h-screen flex items-center justify-center"
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
   >
     <div class="bs-hero-orb bs-hero-orb-a"></div>
     <div class="bs-hero-orb bs-hero-orb-b"></div>
