@@ -36,7 +36,7 @@ const socials = [
 
 <template>
   <footer class="relative mt-12 border-t border-white/5">
-    <div class="mx-auto max-w-7xl px-6 py-14">
+    <div class="w-full mx-auto max-w-7xl px-4 sm:px-6 py-14">
       <div class="grid gap-10 lg:grid-cols-12">
         <div class="lg:col-span-5">
           <a href="#inicio" class="flex items-center gap-2 font-bold">
