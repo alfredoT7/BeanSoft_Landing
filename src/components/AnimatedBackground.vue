@@ -43,8 +43,8 @@ onMounted(async () => {
     scale: 1.0,
     scaleMobile: 0.8,
     points: 12,
-    maxDistance: 25,
-    spacing: 15,
+    maxDistance: 35,
+    spacing: 25,
   });
 
   window.addEventListener('scroll', onScroll, { passive: true });

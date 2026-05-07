@@ -71,7 +71,7 @@ onBeforeUnmount(() => {
     <div class="bs-hero-orb bs-hero-orb-b"></div>
     <div class="bs-hero-scanline" aria-hidden="true"></div>
 
-    <div class="relative w-full mx-auto flex max-w-5xl flex-col items-center text-center px-4 sm:px-6">
+    <div class="relative mx-auto flex max-w-5xl flex-col items-center text-center px-4 sm:px-6">
       <span class="bs-reveal">
         <img
           src="/reducedlogo.svg"
