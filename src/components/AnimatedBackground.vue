@@ -4,8 +4,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue';
 const elRef = ref<HTMLDivElement | null>(null);
 
 let scrollRaf = 0;
-let renderRaf = 0;
-let teardownScene: (() => void) | null = null;
+let vantaEffect: any = null;
 
 const syncScroll = () => {
   if (!elRef.value) return;
@@ -32,321 +31,30 @@ onMounted(async () => {
   if (reduce) return;
 
   const THREE = await import('three');
-  const {
-    AmbientLight,
-    CatmullRomCurve3,
-    Clock,
-    Group,
-    Line,
-    LineBasicMaterial,
-    PerspectiveCamera,
-    Scene,
-    TubeGeometry,
-    Vector3,
-    WebGLRenderer,
-    Mesh,
-    MeshStandardMaterial,
-    PointLight,
-    Color,
-  } = THREE;
+  const VANTA = await import('vanta/dist/vanta.net.min');
 
-  const scene = new Scene();
-  const camera = new PerspectiveCamera(42, 1, 0.1, 100);
-  camera.position.set(0, 0, 7.8);
-
-  const renderer = new WebGLRenderer({
-    alpha: false,
-    antialias: true,
-    powerPreference: 'high-performance',
+  vantaEffect = VANTA.default({
+    el: elRef.value,
+    THREE,
+    color: 0xff6b35,
+    backgroundColor: 0x07111f,
+    mouseControls: true,
+    touchControls: true,
+    scale: 1.0,
+    scaleMobile: 0.8,
+    points: 12,
+    maxDistance: 25,
+    spacing: 15,
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
-  renderer.setClearColor(0x07111f, 1);
-  renderer.domElement.className = 'absolute inset-0 z-10 h-full w-full';
-  elRef.value.appendChild(renderer.domElement);
-
-  scene.add(new AmbientLight(0xffffff, 0.75));
-
-  const keyLight = new PointLight(0xffa15f, 2.2, 30, 2);
-  keyLight.position.set(-4, 2, 6);
-  scene.add(keyLight);
-
-  const fillLight = new PointLight(0xa83a08, 1.25, 24, 2);
-  fillLight.position.set(5, -3, 4);
-  scene.add(fillLight);
-
-  const curveGroup = new Group();
-  scene.add(curveGroup);
-
-  const tubes: Array<{
-    mesh: InstanceType<typeof Mesh>;
-    baseY: number;
-    baseX: number;
-    drift: number;
-    swing: number;
-    tilt: number;
-    floatY: number;
-    floatX: number;
-    roll: number;
-  }> = [];
-
-  const makeCurvePoints = (offsetY: number, amplitude: number, length: number, depth: number, phase: number) => {
-    const points: InstanceType<typeof Vector3>[] = [];
-
-    for (let i = 0; i <= 16; i += 1) {
-      const t = i / 16;
-      const x = (t - 0.5) * length;
-      const y = offsetY + Math.sin((t * Math.PI * 2) + phase) * amplitude;
-      const z = Math.cos((t * Math.PI * 1.5) + phase) * depth;
-      points.push(new Vector3(x, y, z));
-    }
-
-    return points;
-  };
-
-  const addRibbon = ({
-    offsetY,
-    amplitude,
-    length,
-    depth,
-    phase,
-    color,
-    coreColor,
-    radius,
-    opacity,
-    offsetX = 0,
-    shellEmissive = 0.26,
-    coreEmissive = 0.7,
-    centerLineOpacity = 0.48,
-  }: {
-    offsetY: number;
-    amplitude: number;
-    length: number;
-    depth: number;
-    phase: number;
-    color: number;
-    coreColor: number;
-    radius: number;
-    opacity: number;
-    offsetX?: number;
-    shellEmissive?: number;
-    coreEmissive?: number;
-    centerLineOpacity?: number;
-  }) => {
-    const path = new CatmullRomCurve3(makeCurvePoints(offsetY, amplitude, length, depth, phase), false, 'catmullrom', 0.6);
-
-    const shellGeometry = new TubeGeometry(path, 220, radius, 18, false);
-    const shellMaterial = new MeshStandardMaterial({
-      color,
-      emissive: new Color(color),
-      emissiveIntensity: shellEmissive,
-      roughness: 0.28,
-      metalness: 0.08,
-      transparent: false,
-      opacity: 1,
-    });
-
-    const coreGeometry = new TubeGeometry(path, 220, radius * 0.34, 12, false);
-    const coreMaterial = new MeshStandardMaterial({
-      color: coreColor,
-      emissive: new Color(coreColor),
-      emissiveIntensity: coreEmissive,
-      roughness: 0.12,
-      metalness: 0,
-      transparent: false,
-      opacity: 1,
-    });
-
-    const shellMesh = new Mesh(shellGeometry, shellMaterial);
-    const coreMesh = new Mesh(coreGeometry, coreMaterial);
-
-    const lineGeometry = path.getPoints(240);
-    const lineMaterial = new LineBasicMaterial({
-      color: coreColor,
-      transparent: true,
-      opacity: centerLineOpacity,
-    });
-    const line = new Line(new THREE.BufferGeometry().setFromPoints(lineGeometry), lineMaterial);
-
-    const ribbon = new Group();
-    ribbon.position.x = offsetX;
-    ribbon.add(shellMesh);
-    ribbon.add(coreMesh);
-    ribbon.add(line);
-    curveGroup.add(ribbon);
-
-    tubes.push({
-      mesh: ribbon as unknown as InstanceType<typeof Mesh>,
-      baseY: offsetY,
-      baseX: offsetX,
-      drift: 0.18 + Math.random() * 0.14,
-      swing: phase,
-      tilt: (Math.random() - 0.5) * 0.08,
-      floatY: 0.12 + Math.random() * 0.08,
-      floatX: 0.09 + Math.random() * 0.07,
-      roll: 0.045 + Math.random() * 0.025,
-    });
-  };
-
-  addRibbon({
-    offsetY: 1.2,
-    amplitude: 0.95,
-    length: 9.8,
-    depth: 0.5,
-    phase: 0.35,
-    color: 0x55180f,
-    coreColor: 0xc85d4c,
-    radius: 0.16,
-    opacity: 0.34,
-    offsetX: -0.5,
-    shellEmissive: 0.18,
-    coreEmissive: 0.52,
-    centerLineOpacity: 0.24,
-  });
-
-  addRibbon({
-    offsetY: -0.15,
-    amplitude: 1.18,
-    length: 11.4,
-    depth: 0.7,
-    phase: 2.1,
-    color: 0x63230f,
-    coreColor: 0xc86677,
-    radius: 0.14,
-    opacity: 0.28,
-    offsetX: 0.4,
-    shellEmissive: 0.16,
-    coreEmissive: 0.46,
-    centerLineOpacity: 0.18,
-  });
-
-  addRibbon({
-    offsetY: -1.55,
-    amplitude: 0.82,
-    length: 8.7,
-    depth: 0.42,
-    phase: 4.4,
-    color: 0x4c190d,
-    coreColor: 0xc96455,
-    radius: 0.11,
-    opacity: 0.2,
-    offsetX: -0.2,
-  });
-
-  addRibbon({
-    offsetY: 2.05,
-    amplitude: 0.72,
-    length: 7.9,
-    depth: 0.36,
-    phase: 1.15,
-    color: 0x541414,
-    coreColor: 0xc85d4c,
-    radius: 0.095,
-    opacity: 0.18,
-    offsetX: 0.95,
-    shellEmissive: 0.24,
-    coreEmissive: 0.66,
-    centerLineOpacity: 0.42,
-  });
-
-  addRibbon({
-    offsetY: 0.52,
-    amplitude: 0.66,
-    length: 7.4,
-    depth: 0.3,
-    phase: 3.15,
-    color: 0x74270a,
-    coreColor: 0xc86677,
-    radius: 0.085,
-    opacity: 0.16,
-    offsetX: -1.05,
-    shellEmissive: 0.14,
-    coreEmissive: 0.42,
-    centerLineOpacity: 0.16,
-  });
-
-  addRibbon({
-    offsetY: -2.28,
-    amplitude: 0.74,
-    length: 7.8,
-    depth: 0.38,
-    phase: 5.05,
-    color: 0x431011,
-    coreColor: 0xc96455,
-    radius: 0.09,
-    opacity: 0.15,
-    offsetX: 0.85,
-    shellEmissive: 0.22,
-    coreEmissive: 0.62,
-    centerLineOpacity: 0.4,
-  });
-
-  curveGroup.rotation.x = -0.42;
-  curveGroup.rotation.z = -0.08;
-
-  const resize = () => {
-    if (!elRef.value) return;
-    const width = elRef.value.clientWidth || window.innerWidth;
-    const height = elRef.value.clientHeight || window.innerHeight;
-
-    camera.aspect = width / Math.max(height, 1);
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height, false);
-  };
-
-  const clock = new Clock();
-
-  const render = () => {
-    const elapsed = clock.getElapsedTime();
-    curveGroup.rotation.y = Math.sin(elapsed * 0.2) * 0.12;
-    curveGroup.rotation.x = -0.42;
-    curveGroup.rotation.z = -0.08;
-    curveGroup.position.x = Math.sin(elapsed * 0.16) * 0.12;
-    curveGroup.position.y = 0;
-
-    tubes.forEach((tube, index) => {
-      tube.mesh.position.y = tube.baseY + Math.sin(elapsed * tube.drift + tube.swing) * tube.floatY;
-      tube.mesh.position.x = tube.baseX + Math.cos(elapsed * (tube.drift * 0.78) + tube.swing) * tube.floatX;
-      tube.mesh.rotation.z = tube.tilt + Math.sin(elapsed * 0.22 + index) * tube.roll;
-      tube.mesh.rotation.x = Math.cos(elapsed * 0.16 + index) * 0.04;
-    });
-
-    renderer.render(scene, camera);
-    renderRaf = window.requestAnimationFrame(render);
-  };
-
-  resize();
-  syncScroll();
-  render();
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', resize);
-
-  teardownScene = () => {
-    window.removeEventListener('resize', resize);
-
-    curveGroup.traverse((child) => {
-      const mesh = child as THREE.Mesh;
-      if (mesh.geometry) mesh.geometry.dispose();
-
-      const material = (mesh as { material?: THREE.Material | THREE.Material[] }).material;
-      if (Array.isArray(material)) {
-        material.forEach((entry) => entry.dispose());
-      } else {
-        material?.dispose();
-      }
-    });
-
-    renderer.dispose();
-    renderer.domElement.remove();
-  };
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', onScroll);
   if (scrollRaf) window.cancelAnimationFrame(scrollRaf);
-  if (renderRaf) window.cancelAnimationFrame(renderRaf);
-  teardownScene?.();
-  teardownScene = null;
+  if (vantaEffect) vantaEffect.destroy();
+  vantaEffect = null;
 });
 </script>
 
