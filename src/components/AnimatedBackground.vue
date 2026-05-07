@@ -37,7 +37,7 @@ onMounted(async () => {
     el: elRef.value,
     THREE,
     color: 0xff6b35,
-    backgroundColor: 0x07111f,
+    backgroundColor: 0x000000,
     mouseControls: true,
     touchControls: true,
     scale: 1.0,
