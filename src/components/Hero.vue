@@ -65,13 +65,13 @@ onBeforeUnmount(() => {
 <template>
   <section
     id="inicio"
-    class="relative min-h-screen flex items-center justify-center px-6"
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
   >
     <div class="bs-hero-orb bs-hero-orb-a"></div>
     <div class="bs-hero-orb bs-hero-orb-b"></div>
     <div class="bs-hero-scanline" aria-hidden="true"></div>
 
-    <div class="relative mx-auto flex max-w-5xl flex-col items-center text-center">
+    <div class="relative mx-auto flex max-w-5xl flex-col items-center text-center px-4 sm:px-6">
       <span class="bs-reveal">
         <img
           src="/reducedlogo.svg"
@@ -92,9 +92,9 @@ onBeforeUnmount(() => {
         data-delay="1"
         style="font-family: 'Space Grotesk', Inter, sans-serif;"
       >
-        <span class="block">Hola,</span>
+        <span class="block">Hola, Somos</span>
         <span class="bs-terminal-line mt-3 inline-flex items-baseline">
-          <span class="mr-3 text-slate-200">Somos</span><span class="bs-gradient-text">{{ typedText }}</span><span class="bs-terminal-cursor" aria-hidden="true"></span>
+          <span class="bs-gradient-text">{{ typedText }}</span><span class="bs-terminal-cursor" aria-hidden="true"></span>
         </span>
       </h1>
 

@@ -3,7 +3,7 @@
 
 <template>
   <section id="proyecto" class="relative py-28">
-    <div class="mx-auto max-w-7xl px-6">
+    <div class="w-full mx-auto max-w-7xl px-4 sm:px-6">
       <div class="max-w-3xl mx-auto text-center mb-16">
         <p class="bs-reveal-scale text-xs uppercase tracking-[0.35em] text-orange-300/90">Proyecto</p>
         <h2 class="bs-reveal-scale mt-3 text-4xl sm:text-5xl font-bold text-white" data-delay="1" style="font-family:'Space Grotesk',Inter,sans-serif;">
@@ -14,11 +14,11 @@
         </p>
       </div>
 
-      <div class="bs-reveal-scale mt-16 grid lg:grid-cols-[2fr_1fr] gap-8 items-start" data-delay="3">
-        <div class="relative">
+      <div class="bs-reveal-scale mt-16 grid lg:grid-cols-[2fr_1fr] gap-8 items-start mx-auto max-w-xs lg:max-w-none" data-delay="3">
+        <div class="relative mx-auto w-full">
           <div class="absolute -inset-6 bg-gradient-to-br from-orange-500/15 to-transparent rounded-3xl blur-3xl opacity-60"></div>
 
-          <div class="relative">
+          <div class="relative overflow-hidden sm:overflow-visible">
             <div class="relative rounded-2xl overflow-hidden border border-orange-500/20 bs-glass-navy p-2 shadow-2xl">
               <div class="rounded-xl overflow-hidden bg-slate-900/50">
                 <img

@@ -75,9 +75,9 @@ const close = () => (open.value = false);
       visible ? 'bs-navbar-visible' : 'bs-navbar-hidden'
     ]"
   >
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="w-full mx-auto max-w-7xl px-3 sm:px-4 md:px-6">
       <nav
-        class="flex items-center justify-between rounded-full px-4 sm:px-6 py-3 transition-all duration-300"
+        class="flex items-center justify-between rounded-full px-3 sm:px-4 md:px-6 py-3 transition-all duration-300"
         :class="scrolled ? 'bs-glass-strong-navy bs-glow-navy' : 'bs-glass-navy'"
       >
         <a href="#inicio" class="flex items-center gap-2 font-bold tracking-tight">
