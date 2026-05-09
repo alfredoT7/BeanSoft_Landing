@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 
+const handleScroll = (e: Event) => {
+  e.preventDefault();
+  const hero = document.getElementById('inicio');
+  if (hero) hero.classList.add('is-exiting');
+  setTimeout(() => {
+    const target = document.getElementById('proyecto');
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  }, 260);
+};
+
 const targetText = 'BeanSoft';
 const typedLength = ref(0);
 const isDeleting = ref(false);
@@ -53,12 +63,30 @@ const startTyping = () => {
   timer = window.setTimeout(tick, 900);
 };
 
+let heroObserver: IntersectionObserver | null = null;
+
 onMounted(() => {
   startTyping();
+
+  heroObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const hero = document.getElementById('inicio');
+          if (hero) hero.classList.remove('is-exiting');
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  const heroEl = document.getElementById('inicio');
+  if (heroEl) heroObserver.observe(heroEl);
 });
 
 onBeforeUnmount(() => {
   window.clearTimeout(timer);
+  heroObserver?.disconnect();
 });
 </script>
 
@@ -71,7 +99,7 @@ onBeforeUnmount(() => {
     <div class="bs-hero-orb bs-hero-orb-b"></div>
     <div class="bs-hero-scanline" aria-hidden="true"></div>
 
-    <div class="relative mx-auto flex max-w-5xl flex-col items-center text-center px-4 sm:px-6">
+    <div class="bs-hero-main-content relative mx-auto flex max-w-5xl flex-col items-center text-center px-4 sm:px-6">
       <span class="bs-reveal">
         <img
           src="/reducedlogo.svg"
@@ -107,12 +135,15 @@ onBeforeUnmount(() => {
 
       <a
         href="#proyecto"
-        class="bs-reveal mt-16 inline-flex flex-col items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-slate-400 hover:text-orange-300 transition bs-scroll-cue"
+        class="bs-reveal bs-scroll-btn mt-16 inline-flex flex-col items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-slate-400 hover:text-orange-300"
         data-delay="3"
         aria-label="Ir a proyecto"
+        @click.prevent="handleScroll"
       >
-        Scroll
-        <span class="h-12 w-[1px] bg-gradient-to-b from-[#C74F0B] to-transparent"></span>
+        <span class="bs-scroll-cue inline-flex flex-col items-center gap-2">
+          Scroll
+          <span class="h-12 w-[1px] bg-gradient-to-b from-[#C74F0B] to-transparent"></span>
+        </span>
       </a>
     </div>
   </section>
