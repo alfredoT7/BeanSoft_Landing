@@ -63,30 +63,12 @@ const startTyping = () => {
   timer = window.setTimeout(tick, 900);
 };
 
-let heroObserver: IntersectionObserver | null = null;
-
 onMounted(() => {
   startTyping();
-
-  heroObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          const hero = document.getElementById('inicio');
-          if (hero) hero.classList.remove('is-exiting');
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  const heroEl = document.getElementById('inicio');
-  if (heroEl) heroObserver.observe(heroEl);
 });
 
 onBeforeUnmount(() => {
   window.clearTimeout(timer);
-  heroObserver?.disconnect();
 });
 </script>
 
@@ -99,7 +81,7 @@ onBeforeUnmount(() => {
     <div class="bs-hero-orb bs-hero-orb-b"></div>
     <div class="bs-hero-scanline" aria-hidden="true"></div>
 
-    <div class="bs-hero-main-content relative mx-auto flex max-w-5xl flex-col items-center text-center px-4 sm:px-6">
+    <div class="bs-section-content bs-hero-main-content relative mx-auto flex max-w-5xl flex-col items-center text-center px-4 sm:px-6">
       <span class="bs-reveal">
         <img
           src="/reducedlogo.svg"

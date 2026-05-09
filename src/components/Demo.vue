@@ -14,7 +14,7 @@ const submit = (e: Event) => {
 
 <template>
   <section id="demo" class="relative py-28">
-    <div class="w-full mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="bs-section-content w-full mx-auto max-w-7xl px-4 sm:px-6">
       <div class="bs-reveal relative overflow-hidden rounded-[2.5rem] bs-glass-strong p-8 sm:p-14 bs-glow-orange">
         <div class="absolute -top-40 -right-20 h-96 w-96 rounded-full bg-[#C74F0B]/20 blur-3xl"></div>
         <div class="absolute -bottom-40 -left-20 h-96 w-96 rounded-full bg-[#A83A08]/25 blur-3xl"></div>
