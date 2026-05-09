@@ -40,7 +40,21 @@ const {
         },
         { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
       );
-      document.querySelectorAll('.bs-reveal').forEach((el) => io.observe(el));
+      document.querySelectorAll('.bs-reveal, .bs-reveal-scale, .bs-float-in').forEach((el) => io.observe(el));
+
+      const sectionObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting && e.boundingClientRect.top < 0) {
+              e.target.classList.add('is-exiting');
+            } else if (e.isIntersecting) {
+              e.target.classList.remove('is-exiting');
+            }
+          });
+        },
+        { threshold: 0.08 }
+      );
+      document.querySelectorAll('section').forEach((s) => sectionObs.observe(s));
     </script>
   </body>
 </html>
